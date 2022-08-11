@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="main-screen">
+    <div class="main-screen" ref="mainWrapper">
       <v-img
-        lazy-src="https://s2.loli.net/2022/08/10/sQG8KqyVhUzn13I.png"
+        :lazy-src="mainImgLazy"
         :max-height="screen.height"
         :max-width="screen.width"
-        src="/main_page_img.png"
+        :src="mainImg"
         style="position: absolute; z-index: 1"
       ></v-img>
       <v-scroll-y-reverse-transition>
@@ -49,8 +49,14 @@
 
 <script>
 export default {
+  // https://s2.loli.net/2022/08/11/gdL2MxBvorJehDZ.png
   name: 'IndexPage',
   data() {
+    var mainImg = this.$_.sample(['0.png', '1.png']);
+    var mainImgLazyMap = {
+      '0.png': 'https://s2.loli.net/2022/08/10/sQG8KqyVhUzn13I.png',
+      '1.png': 'https://s2.loli.net/2022/08/11/gdL2MxBvorJehDZ.png',
+    };
     return {
       screen: {
         width: 1000,
@@ -58,34 +64,36 @@ export default {
       },
       show: false,
       mainMarginTop: 500,
+      mainImg: '/mainPageImgs/' + mainImg,
+      mainImgLazy: mainImgLazyMap[mainImg],
       loading: {
         qq: false,
       },
-    }
+    };
   },
   mounted() {
-    this.screen.width = window.innerWidth
-    this.screen.height = window.innerHeight
+    this.screen.width = window.innerWidth;
+    this.screen.height = window.innerHeight - 64;
 
-    var that = this
+    var that = this;
     setTimeout(() => {
-      that.show = true
-    }, 700)
+      that.show = true;
+    }, 700);
   },
   methods: {
     openNewBlank(url) {
-      var that = this
-      this.loading.qq = true
-      window.open(url, '_blank')
+      var that = this;
+      this.loading.qq = true;
+      window.open(url, '_blank');
       setTimeout(() => {
-        that.loading.qq = false
-      }, 200)
+        that.loading.qq = false;
+      }, 200);
     },
     goto(url) {
-      this.$router.push(url)
+      this.$router.push(url);
     },
   },
-}
+};
 </script>
 <style>
 .main {
