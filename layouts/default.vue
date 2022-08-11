@@ -6,7 +6,12 @@
           <div class="text-h6">JerryMc</div>
         </div>
 
-        <v-btn v-for="link in links" :key="link" @click="$router.push(link.to)" text>
+        <v-btn
+          v-for="link in links"
+          :key="link"
+          @click="$router.push(link.to)"
+          text
+        >
           {{ link.text }}
         </v-btn>
 
@@ -22,7 +27,7 @@
     </v-app-bar>
 
     <v-main class="grey lighten-3">
-        <Nuxt />
+      <Nuxt />
     </v-main>
   </v-app>
 </template>
@@ -33,21 +38,21 @@ export default {
     return {
       links: [
         {
-          text: "主页",
-          to: "/"
-        }
+          text: '主页',
+          to: '/',
+        },
       ],
       isLogin: false,
       accoutInfo: {
-        name: ''
-      }
+        name: '',
+      },
     }
   },
-  mounted(){
-    if(window.screen.height <= 450){
-      console.log('屏幕太小！');
-      throw new Error('屏幕太小！');
+  mounted() {
+    if (window.screen.height <= 450) {
+      console.log('屏幕太小！')
+      throw new Error('屏幕太小！')
     }
-  }
+  },
 }
 </script>
