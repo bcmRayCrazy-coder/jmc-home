@@ -43,6 +43,7 @@ const config = {
     '@nuxtjs/pwa',
     '@nuxtjs/proxy',
     'vue-toastification/nuxt',
+    'cookie-universal-nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

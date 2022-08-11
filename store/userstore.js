@@ -17,4 +17,13 @@ export const actions = {
   setToken({ commit }, token) {
     commit('setToken', token);
   },
+  nuxtServerInit({ commit }, { app }) {
+    console.log('Nuxt server initing userstore');
+    const token = app.$cookies.get('token');
+    // 加载数据到状态树
+    commit('setToken', token);
+  },
+};
+export const getters = {
+  token: (state) => state.token,
 };
