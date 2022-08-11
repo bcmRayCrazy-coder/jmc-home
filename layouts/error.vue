@@ -1,12 +1,12 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-dialog
       v-model="dialog"
       persistent
       transition="fade-transition"
       max-width="500px"
     >
-      <v-card color="error">
+      <v-card color="error" dark>
         <v-card-title primary-title>
           <v-icon>mdi-alert-circle-outline</v-icon>
           <span class="headline" v-if="error.statusCode === 404">{{
@@ -49,19 +49,19 @@ export default {
       otherError: '出错了',
       dialog: true,
       backMessage: '返回',
-    }
+    };
   },
   head() {
     const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
+      this.error.statusCode === 404 ? this.pageNotFound : this.otherError;
     return {
       title,
-    }
+    };
   },
   methods: {
     back() {
-      this.$router.back()
+      this.$router.back();
     },
   },
-}
+};
 </script>

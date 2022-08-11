@@ -46,13 +46,19 @@ export default {
       accoutInfo: {
         name: '',
       },
-    }
+    };
   },
   mounted() {
     if (window.screen.height <= 450) {
-      console.log('屏幕太小！')
-      throw new Error('屏幕太小！')
+      console.log('屏幕太小！');
+      throw new Error('屏幕太小！');
+    }
+    var token = this.$store.state.userstore.token;
+    console.log(token);
+    if (!token) console.log('未登录');
+    if (token) {
+      console.log('登录');
     }
   },
-}
+};
 </script>

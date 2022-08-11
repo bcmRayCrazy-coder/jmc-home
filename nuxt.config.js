@@ -1,4 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
+import colors from 'vuetify/es5/util/colors';
 
 /**
  * @type {import('@nuxt/types').NuxtConfig}
@@ -24,7 +24,7 @@ const config = {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '@/plugins/localStorage', ssr: false }],
+  plugins: [{ src: '@/plugins/localStorage', ssr: false }, '@/plugins/lodash'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -93,6 +93,6 @@ const config = {
     // host: "0.0.0.0",
     port: 1200,
   },
-}
+};
 
-export default config
+export default config;
