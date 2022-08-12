@@ -14,17 +14,19 @@
           <h5 class="mdescription mb-6">
             JerryMc (简称jmc) 是一个养老的生存服务器, 玩家活跃, 等待你的加入哦~
           </h5>
-          <div class="d-flex justify-space-around mb-6 btn-group">
+          <div class="d-flex mb-6 btn-group buttons">
             <div>
               <v-btn block @click="goto('/users/login')">
                 <v-icon>mdi-account-circle-outline</v-icon> 登录/注册
               </v-btn>
             </div>
+            <v-spacer></v-spacer>
             <div>
               <v-btn block dark color="green lighten-1">
                 <v-icon>mdi-text-box-check-outline</v-icon> 申请白名单
               </v-btn>
             </div>
+            <v-spacer></v-spacer>
             <div>
               <v-btn
                 block
@@ -96,6 +98,10 @@ export default {
 };
 </script>
 <style>
+.buttons {
+  width: 50vw;
+}
+
 .main {
   position: absolute;
   z-index: 2;
