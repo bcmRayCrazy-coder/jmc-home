@@ -67,14 +67,6 @@ export default {
     this.screen.width = window.innerWidth;
     this.screen.height = window.innerHeight - 64;
     var that = this;
-
-    var token = that.token;
-    if (token) {
-      var res = that.$axios.$post('/api/users/online', { token });
-      if (!res.success) return that.$toast.error('登录状态获取失败!请重新登录');
-      that.isLogin = true;
-      console.log(isLogin);
-    }
     setTimeout(() => {
       that.show = true;
     }, 700);
