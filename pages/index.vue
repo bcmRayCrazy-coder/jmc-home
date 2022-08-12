@@ -30,7 +30,6 @@
             <div>
               <v-btn
                 block
-                outlined
                 color="blue lighten-1"
                 :loading="loading.qq"
                 @click="
