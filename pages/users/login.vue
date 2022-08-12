@@ -1,20 +1,11 @@
 <template>
   <div class="container">
-    <v-card min-width="500px">
+    <v-card min-width="500px" v-if="!this.isLogin">
       <v-card-title> 登录 </v-card-title>
       <v-card-text>
         <v-form ref="form">
-          <v-text-field
-            v-model="form.username"
-            label="用户名"
-            :rules="[(v) => !!v || '请输入用户名']"
-          ></v-text-field>
-          <v-text-field
-            v-model="form.password"
-            label="密码"
-            :rules="[(v) => !!v || '请输入密码']"
-            type="password"
-          >
+          <v-text-field v-model="form.username" label="用户名" :rules="[(v) => !!v || '请输入用户名']"></v-text-field>
+          <v-text-field v-model="form.password" label="密码" :rules="[(v) => !!v || '请输入密码']" type="password">
           </v-text-field>
         </v-form>
         没有账号?<a href="/users/register">注册</a>一个
@@ -22,6 +13,13 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="success" @click="login()">登录</v-btn>
+      </v-card-actions>
+    </v-card>
+    <v-card min-width="500px" v-if="this.isLogin">
+      <v-card-title> 你已经登录过了！ </v-card-title>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="success" @click="goto('/')">返回主页</v-btn>
       </v-card-actions>
     </v-card>
   </div>
@@ -60,6 +58,9 @@ export default {
           window.open('/', '__blank');
         }, 1000);
       }
+    },
+    goto(url) {
+      this.$router.push(url);
     },
   },
 };

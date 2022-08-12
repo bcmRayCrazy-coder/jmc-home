@@ -1,13 +1,8 @@
 <template>
   <div>
     <div class="main-screen" ref="mainWrapper">
-      <v-img
-        :lazy-src="mainImgLazy"
-        :height="screen.height"
-        :width="screen.width"
-        :src="mainImg"
-        style="position: absolute; z-index: 1"
-      ></v-img>
+      <v-img :lazy-src="mainImgLazy" :height="screen.height" :width="screen.width" :src="mainImg"
+        style="position: absolute; z-index: 1"></v-img>
       <v-scroll-y-reverse-transition>
         <div v-if="show" class="text-center main" ref="main">
           <h1 class="mtitle mb-10">JerryMc</h1>
@@ -28,16 +23,11 @@
             </div>
             <v-spacer></v-spacer>
             <div>
-              <v-btn
-                block
-                color="blue lighten-1"
-                :loading="loading.qq"
-                @click="
-                  openNewBlank(
-                    'https://qm.qq.com/cgi-bin/qm/qr?k=cCRVoxnZBl6T2vVpSHRnUk1f3RR3RJH9'
-                  )
-                "
-              >
+              <v-btn block color="blue lighten-1" :loading="loading.qq" @click="
+                openNewBlank(
+                  'https://qm.qq.com/cgi-bin/qm/qr?k=cCRVoxnZBl6T2vVpSHRnUk1f3RR3RJH9'
+                )
+              ">
                 <v-icon>mdi-qqchat</v-icon> 加入QQ群
               </v-btn>
             </div>
@@ -63,6 +53,7 @@ export default {
         width: 1000,
         height: 1000,
       },
+      isLogin: false,
       show: false,
       mainMarginTop: 500,
       mainImg: '/mainPageImgs/' + mainImg,
@@ -75,16 +66,19 @@ export default {
   mounted() {
     this.screen.width = window.innerWidth;
     this.screen.height = window.innerHeight - 64;
-
     var that = this;
+
+    var token = that.token;
+    if (token) {
+      var res = that.$axios.$post('/api/users/online', { token });
+      if (!res.success) return that.$toast.error('登录状态获取失败!请重新登录');
+      that.isLogin = true;
+      console.log(isLogin);
+    }
     setTimeout(() => {
       that.show = true;
     }, 700);
 
-    var isLogin = that.isLogin;
-    if (isLogin) {
-      document.getElementById("login").style="display: none";
-    }
   },
   methods: {
     openNewBlank(url) {

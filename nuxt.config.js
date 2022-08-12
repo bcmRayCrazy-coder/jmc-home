@@ -53,7 +53,7 @@ const config = {
   },
   proxy: {
     '/api': {
-      target: 'http://localhost:80',
+      target: 'http://www.jerrymc.cn:80',
       pathRewrite: {
         '^/api/': '/',
       },
