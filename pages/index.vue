@@ -7,7 +7,6 @@
         :width="screen.width"
         :src="mainImg"
         style="position: absolute; z-index: 1"
-        key="test"
       ></v-img>
       <v-scroll-y-reverse-transition>
         <div v-if="show" class="text-center main" ref="main">
