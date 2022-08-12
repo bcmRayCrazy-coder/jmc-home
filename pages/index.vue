@@ -3,8 +3,8 @@
     <div class="main-screen" ref="mainWrapper">
       <v-img
         :lazy-src="mainImgLazy"
-        :max-height="screen.height"
-        :max-width="screen.width"
+        :height="screen.height"
+        :width="screen.width"
         :src="mainImg"
         style="position: absolute; z-index: 1"
       ></v-img>
