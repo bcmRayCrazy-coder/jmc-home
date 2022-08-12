@@ -16,7 +16,7 @@
           </h5>
           <div class="d-flex mb-6 btn-group buttons">
             <div>
-              <v-btn block @click="goto('/users/login')">
+              <v-btn block @click="goto('/users/login')" id="login">
                 <v-icon>mdi-account-circle-outline</v-icon> 登录/注册
               </v-btn>
             </div>
@@ -81,6 +81,11 @@ export default {
     setTimeout(() => {
       that.show = true;
     }, 700);
+
+    var isLogin = that.isLogin;
+    if (isLogin) {
+      document.getElementById("login").style="display: none";
+    }
   },
   methods: {
     openNewBlank(url) {
