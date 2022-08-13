@@ -54,6 +54,7 @@ export default {
         height: 1000,
       },
       isLogin: false,
+      accoutInfo:{},
       show: false,
       mainMarginTop: 500,
       mainImg: '/mainPageImgs/' + mainImg,
@@ -67,6 +68,17 @@ export default {
     this.screen.width = window.innerWidth;
     this.screen.height = window.innerHeight - 64;
     var that = this;
+    setTimeout(async () => {
+      var token = that.token;
+      if (!token) console.log('未登录');
+      if (token) {
+        var res = await that.$axios.$post('/api/users/online', { token });
+        if (!res.success) return that.$toast.error('登录状态获取失败!请重新登录');
+        that.isLogin = true;
+        that.accoutInfo = res.message.data;
+        console.log(that.accoutInfo);
+      }
+    }, 100);
     setTimeout(() => {
       that.show = true;
     }, 700);
