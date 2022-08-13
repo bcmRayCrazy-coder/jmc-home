@@ -1,0 +1,20 @@
+name: JMC nodejs script workflow
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  prettier:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Setup Node.js"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: yarn
+      - name: Lint code
+        run: yarn lintfix
