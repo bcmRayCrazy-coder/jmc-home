@@ -1,4 +1,6 @@
 import colors from 'vuetify/es5/util/colors';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * @type {import('@nuxt/types').NuxtConfig}
@@ -53,7 +55,7 @@ const config = {
     },
     proxy: {
         '/api': {
-            target: 'http://localhost:80',
+            target: 'https://www.jerrymc.cn:443',
             pathRewrite: {
                 '^/api/': '/',
             },
@@ -93,6 +95,10 @@ const config = {
     server: {
         host: "0.0.0.0",
         port: 1200,
+        https: {
+            key: fs.readFileSync(path.resolve(__dirname, 'https/mc.jerrymc.cn.key')),
+            cert: fs.readFileSync(path.resolve(__dirname, 'https/mc.jerrymc.cn_bundle.crt')),
+        }
     },
 };
 

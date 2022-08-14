@@ -17,7 +17,7 @@
             </div>
             <v-spacer></v-spacer>
             <div>
-              <v-btn block dark color="green lighten-1">
+              <v-btn block dark color="green lighten-1" @click="goto('/whitelist/request')">
                 <v-icon>mdi-text-box-check-outline</v-icon> 申请白名单
               </v-btn>
             </div>
