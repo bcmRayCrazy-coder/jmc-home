@@ -1,6 +1,4 @@
 {
   "nuxt.isNuxtApp": true,
-  "githubPullRequests.ignoredPullRequestBranches": [
-    "dev"
-  ]
+  "githubPullRequests.ignoredPullRequestBranches": ["dev"]
 }

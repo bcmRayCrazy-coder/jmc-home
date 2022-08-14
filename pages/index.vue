@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="main-screen" ref="mainWrapper">
-      <v-img :lazy-src="mainImgLazy" :height="screen.height" :width="screen.width" :src="mainImg"
-        style="position: absolute; z-index: 1"></v-img>
+      <v-img
+        :lazy-src="mainImgLazy"
+        :height="screen.height"
+        :width="screen.width"
+        :src="mainImg"
+        style="position: absolute; z-index: 1"
+      ></v-img>
       <v-scroll-y-reverse-transition>
         <div v-if="show" class="text-center main" ref="main">
           <h1 class="mtitle mb-10">JerryMc</h1>
@@ -17,17 +22,27 @@
             </div>
             <v-spacer></v-spacer>
             <div>
-              <v-btn block dark color="green lighten-1" @click="goto('/whitelist/request')">
+              <v-btn
+                block
+                dark
+                color="green lighten-1"
+                @click="goto('/whitelist/request')"
+              >
                 <v-icon>mdi-text-box-check-outline</v-icon> 申请白名单
               </v-btn>
             </div>
             <v-spacer></v-spacer>
             <div>
-              <v-btn block color="blue lighten-1" :loading="loading.qq" @click="
-                openNewBlank(
-                  'https://qm.qq.com/cgi-bin/qm/qr?k=cCRVoxnZBl6T2vVpSHRnUk1f3RR3RJH9'
-                )
-              ">
+              <v-btn
+                block
+                color="blue lighten-1"
+                :loading="loading.qq"
+                @click="
+                  openNewBlank(
+                    'https://qm.qq.com/cgi-bin/qm/qr?k=cCRVoxnZBl6T2vVpSHRnUk1f3RR3RJH9'
+                  )
+                "
+              >
                 <v-icon>mdi-qqchat</v-icon> 加入QQ群
               </v-btn>
             </div>
@@ -54,7 +69,7 @@ export default {
         height: 1000,
       },
       isLogin: false,
-      accoutInfo:{},
+      accoutInfo: {},
       show: false,
       mainMarginTop: 500,
       mainImg: '/mainPageImgs/' + mainImg,
@@ -73,7 +88,8 @@ export default {
       if (!token) console.log('未登录');
       if (token) {
         var res = await that.$axios.$post('/api/users/online', { token });
-        if (!res.success) return that.$toast.error('登录状态获取失败!请重新登录');
+        if (!res.success)
+          return that.$toast.error('登录状态获取失败!请重新登录');
         that.isLogin = true;
         that.accoutInfo = res.message.data;
         console.log(that.accoutInfo);
@@ -82,7 +98,6 @@ export default {
     setTimeout(() => {
       that.show = true;
     }, 700);
-
   },
   methods: {
     openNewBlank(url) {

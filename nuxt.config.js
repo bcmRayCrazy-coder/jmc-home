@@ -16,7 +16,11 @@ const config = {
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1',
             },
-            { hid: 'description', name: 'description', content: 'jerrymc是一个我的世界Minecraft养老生存服务器' },
+            {
+                hid: 'description',
+                name: 'description',
+                content: 'jerrymc是一个我的世界Minecraft养老生存服务器',
+            },
             { name: 'format-detection', content: 'telephone=no' },
         ],
         link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
@@ -55,7 +59,7 @@ const config = {
     },
     proxy: {
         '/api': {
-            target: 'https://www.jerrymc.cn:443',
+            target: 'http://localhost:80',
             pathRewrite: {
                 '^/api/': '/',
             },
@@ -93,12 +97,12 @@ const config = {
     build: {},
 
     server: {
-        host: "0.0.0.0",
+        host: '0.0.0.0',
         port: 1200,
-        https: {
-            key: fs.readFileSync(path.resolve(__dirname, 'https/mc.jerrymc.cn.key')),
-            cert: fs.readFileSync(path.resolve(__dirname, 'https/mc.jerrymc.cn_bundle.crt')),
-        }
+        // https: {
+        //     key: fs.readFileSync(path.resolve(__dirname, 'https/mc.jerrymc.cn.key')),
+        //     cert: fs.readFileSync(path.resolve(__dirname, 'https/mc.jerrymc.cn_bundle.crt')),
+        // }
     },
 };
 

@@ -92,6 +92,11 @@ export default {
         }, 1000);
       }
     },
+    head() {
+      return {
+        title: '注册',
+      };
+    },
   },
 };
 </script>

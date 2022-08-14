@@ -6,7 +6,12 @@
           <div class="text-h6">JerryMc</div>
         </div>
 
-        <v-btn v-for="link in links" :key="link" @click="$router.push(link.to)" text>
+        <v-btn
+          v-for="link in links"
+          :key="link"
+          @click="$router.push(link.to)"
+          text
+        >
           {{ link.text }}
         </v-btn>
 
@@ -36,10 +41,14 @@ export default {
           text: '主页',
           to: '/',
         },
+        {
+          text: '白名单列表',
+          to: '/whitelist/list',
+        },
       ],
       isLogin: false,
       accoutInfo: {
-        name:''
+        name: '',
       },
     };
   },
@@ -54,7 +63,8 @@ export default {
       if (!token) console.log('未登录');
       if (token) {
         var res = await that.$axios.$post('/api/users/online', { token });
-        if (!res.success) return that.$toast.error('登录状态获取失败!请重新登录');
+        if (!res.success)
+          return that.$toast.error('登录状态获取失败!请重新登录');
         that.isLogin = true;
         that.accoutInfo = res.message.data;
         console.log(that.accoutInfo);
