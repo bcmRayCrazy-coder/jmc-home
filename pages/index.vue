@@ -5,9 +5,9 @@
         style="position: absolute; z-index: 1"></v-img>
       <v-scroll-y-reverse-transition>
         <div class="text-center main" ref="main">
-          <h1 class="mtitle mb-10">JerryMc</h1>
+          <h1 class="mtitle mb-10">JerryMC</h1>
           <h5 class="mdescription mb-6">
-            JerryMc (简称jmc) 是一个养老的生存服务器, 玩家活跃, 等待你的加入哦~
+            JerryMC (简称JMC) 是一个养老的生存服务器, 玩家活跃, 等待你的加入哦~
           </h5>
           <div class="d-flex mb-6 btn-group buttons">
             <div>

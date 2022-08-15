@@ -3,7 +3,7 @@
     <v-app-bar app color="white" flat>
       <v-container class="py-0 fill-height">
         <div class="text-center mr-5">
-          <div class="text-h6">JerryMc</div>
+          <div class="text-h6">JerryMC</div>
         </div>
 
         <v-btn

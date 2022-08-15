@@ -8,7 +8,7 @@ import path from 'path';
 const config = {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        titleTemplate: '%s - Jmc生存服官网',
+        titleTemplate: '%s - JMC生存服官网',
         title: '主页',
         meta: [
             { charset: 'utf-8' },
