@@ -1,13 +1,8 @@
 <template>
   <div>
     <div class="main-screen" ref="mainWrapper">
-      <v-img
-        :lazy-src="mainImgLazy"
-        :height="screen.height"
-        :width="screen.width"
-        :src="mainImg"
-        style="position: absolute; z-index: 1"
-      ></v-img>
+      <v-img :lazy-src="mainImgLazy" :height="screen.height" :width="screen.width" :src="mainImg"
+        style="position: absolute; z-index: 1"></v-img>
       <v-scroll-y-reverse-transition>
         <div class="text-center main" ref="main">
           <h1 class="mtitle mb-10">JerryMc</h1>
@@ -15,34 +10,27 @@
             JerryMc (简称jmc) 是一个养老的生存服务器, 玩家活跃, 等待你的加入哦~
           </h5>
           <div class="d-flex mb-6 btn-group buttons">
-            <div v-if="isLogin == false">
+            <div>
               <v-btn v-if="isLogin == false" block @click="goto('/users/login')" id="login">
                 <v-icon>mdi-account-circle-outline</v-icon> 登录/注册
               </v-btn>
+              <v-btn v-if="isLogin == true" block @click="goto('/users/login')" id="login">
+                <v-icon>mdi-account-box-multiple-outline</v-icon> 切换账号
+              </v-btn>
             </div>
-            <v-spacer v-if="isLogin == false"></v-spacer>
+            <v-spacer></v-spacer>
             <div>
-              <v-btn
-                block
-                dark
-                color="green lighten-1"
-                @click="goto('/whitelist/request')"
-              >
+              <v-btn block dark color="green lighten-1" @click="goto('/whitelist/request')">
                 <v-icon>mdi-text-box-check-outline</v-icon> 申请白名单
               </v-btn>
             </div>
             <v-spacer></v-spacer>
             <div>
-              <v-btn
-                block
-                color="blue lighten-1"
-                :loading="loading.qq"
-                @click="
-                  openNewBlank(
-                    'https://qm.qq.com/cgi-bin/qm/qr?k=cCRVoxnZBl6T2vVpSHRnUk1f3RR3RJH9'
-                  )
-                "
-              >
+              <v-btn block color="blue lighten-1" :loading="loading.qq" @click="
+                openNewBlank(
+                  'https://qm.qq.com/cgi-bin/qm/qr?k=cCRVoxnZBl6T2vVpSHRnUk1f3RR3RJH9'
+                )
+              ">
                 <v-icon>mdi-qqchat</v-icon> 加入QQ群
               </v-btn>
             </div>
