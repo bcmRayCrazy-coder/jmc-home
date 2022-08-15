@@ -9,18 +9,18 @@
         style="position: absolute; z-index: 1"
       ></v-img>
       <v-scroll-y-reverse-transition>
-        <div v-if="show" class="text-center main" ref="main">
+        <div v-if="!isLogin" class="text-center main" ref="main">
           <h1 class="mtitle mb-10">JerryMc</h1>
           <h5 class="mdescription mb-6">
             JerryMc (简称jmc) 是一个养老的生存服务器, 玩家活跃, 等待你的加入哦~
           </h5>
           <div class="d-flex mb-6 btn-group buttons">
-            <div>
-              <v-btn block @click="goto('/users/login')" id="login">
+            <div v-if="isLogin = false">
+              <v-btn v-if="isLogin = false" block @click="goto('/users/login')" id="login">
                 <v-icon>mdi-account-circle-outline</v-icon> 登录/注册
               </v-btn>
             </div>
-            <v-spacer></v-spacer>
+            <v-spacer v-if="isLogin = false"></v-spacer>
             <div>
               <v-btn
                 block
