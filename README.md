@@ -2,6 +2,7 @@
 
 ## Build Setup
 
+![](https://img.shields.io/github/languages/top/bcmraycrazy-coder/jmc-home)  
 ```bash
 # install dependencies
 $ yarn install
