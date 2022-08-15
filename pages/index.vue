@@ -15,12 +15,12 @@
             JerryMc (简称jmc) 是一个养老的生存服务器, 玩家活跃, 等待你的加入哦~
           </h5>
           <div class="d-flex mb-6 btn-group buttons">
-            <div v-if="isLogin = true">
-              <v-btn v-if="isLogin = true" block @click="goto('/users/login')" id="login">
+            <div v-if="isLogin == false">
+              <v-btn v-if="isLogin == false" block @click="goto('/users/login')" id="login">
                 <v-icon>mdi-account-circle-outline</v-icon> 登录/注册
               </v-btn>
             </div>
-            <v-spacer v-if="isLogin = true"></v-spacer>
+            <v-spacer v-if="isLogin == false"></v-spacer>
             <div>
               <v-btn
                 block
@@ -94,10 +94,16 @@ export default {
         that.accoutInfo = res.message.data;
         console.log(that.accoutInfo);
       }
-    }, 100);
+    }, 1);
     setTimeout(() => {
       that.show = true;
     }, 700);
+  },
+  computed: {
+    token() {
+      var token = this.$store.state.userstore.token;
+      return token;
+    },
   },
   methods: {
     openNewBlank(url) {
