@@ -94,7 +94,7 @@ export default {
         that.accoutInfo = res.message.data;
         console.log(that.accoutInfo);
       }
-    }, 1);
+    }, 100);
     setTimeout(() => {
       that.show = true;
     }, 700);
