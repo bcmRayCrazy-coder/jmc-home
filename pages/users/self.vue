@@ -36,7 +36,8 @@
         <v-col style="margin-left: 0px; margin-top: -40px;">
           <p> 等级: {{ userInfo.level }} </p>
           <p> 绑定的邮箱： {{ userInfo.email }}</p>
-
+          <p> 经验值：{{userInfo.exp}}/100</p>
+          <v-progress-linear :value="userInfo.exp" rounded></v-progress-linear>
         </v-col>
       </v-card-text>
     </v-card>
