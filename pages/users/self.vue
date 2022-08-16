@@ -13,7 +13,8 @@
       <v-card-text>
         <div style="height: 10px;"></div>
         <v-row style="margin-left: 0px">
-          <div @click="snackbar = true; text = '管理员权限组lv.'+userInfo.adminLevel+'勋章'" style="position: relative; left: 65px; top: -5px;z-index: 3;">
+          <div @click="snackbar = true; text = '管理员权限组lv.' + userInfo.adminLevel + '勋章'"
+            style="position: relative; left: 65px; top: -5px;z-index: 3;">
             <v-badge :color="adminBadgeColor" avatar overlap offset-x="70" icon="mdi-account"></v-badge>
           </div>
           <v-avatar class="mr-2" color="grey darken-1" size="60"></v-avatar>
@@ -24,10 +25,8 @@
             </v-btn>
           </v-snackbar>
           <v-col cols="13" style="margin-top: -10px;">
-            <p>{{ userInfo.name }} <v-chip v-if="userInfo.isAdmin" class="ma-1"
-                :color="userInfo.isAdmin ? 'red' : 'grey'" text-color="white" small>{{ userInfo.isAdmin ? '管理员' : '普通用户'
-                }}</v-chip>
-              <v-chip class="ma-1" color="red" text-color="white" small>账号等级lv.{{ userInfo.level }}</v-chip>
+            <p>{{ userInfo.name }} <v-chip v-if="userInfo.isAdmin" class="ma-1" :color="userInfo.isAdmin ? adminBadgeColor : 'grey'"
+                text-color="white" small>{{ userInfo.isAdmin ? '管理员 lv'+userInfo.adminLevel : '普通用户' }}</v-chip>
             </p>
             <p>个性签名：{{ userInfo.description }}</p>
           </v-col>
@@ -35,9 +34,15 @@
         <div style="height: 30px"></div>
         <v-col style="margin-left: 0px; margin-top: -40px;">
           <p> 等级: {{ userInfo.level }} </p>
-          <p> 绑定的邮箱： {{ userInfo.email }}</p>
-          <p> 经验值：{{userInfo.exp}}/100</p>
+          <v-row style="margin-left: 0px;">
+            <p> 绑定的邮箱： {{ userInfo.email }}</p>
+            <v-spacer></v-spacer>
+            <v-btn height="20px" @click="changeEmail()">更改</v-btn>
+          </v-row>
+          <p> 等级经验值：{{ userInfo.exp }}/100 来达到等级{{ userInfo.level + 1 }}</p>
           <v-progress-linear :value="userInfo.exp" rounded></v-progress-linear>
+          <div style="height: 10px;" v-if="userInfo.sponsershipAmount > 0"></div>
+          <p v-if="userInfo.sponsershipAmount > 0"> 你是为JerryMC赞助了{{ userInfo.sponsershipAmount }}元的用户！ 谢谢你！</p>
         </v-col>
       </v-card-text>
     </v-card>
@@ -64,20 +69,26 @@ export default {
         adminLevel: 0,
         avatar: '',
         description: '',
-        email: '',
+        email: '未绑定',
         exp: 0,
         gender: 0,
         gold: 0,
         id: 0,
         isAdmin: false,
         level: 0,
-        qq: '',
+        qq: '未绑定',
         sponsershipAmount: 0,
       },
       loading: true,
       snackbar: false,
       text: '',
     };
+  },
+  methods: {
+    changeEmail() {
+      this.text = '功能开发中，敬请谅解~'
+      this.snackbar = true
+    }
   },
   mounted() {
     var that = this;
