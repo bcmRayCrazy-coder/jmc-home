@@ -18,7 +18,7 @@
         <v-spacer></v-spacer>
 
         <div class="text-center">
-          <v-chip class="ma-1" color="indigo" text-color="white">
+          <v-chip class="ma-1" color="indigo" text-color="white" @click="$router.push('/users/self')">
             <v-avatar class="mr-2" color="grey darken-1" size="24"></v-avatar>
             {{ isLogin ? accoutInfo.name : '未登录' }}
           </v-chip>
@@ -45,6 +45,10 @@ export default {
           text: '白名单列表',
           to: '/whitelist/list',
         },
+        {
+          text: '个人中心',
+          to: '/users/self/'
+        }
       ],
       isLogin: false,
       accoutInfo: {

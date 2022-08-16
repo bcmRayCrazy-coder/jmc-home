@@ -1,14 +1,27 @@
 <template>
   <div>
     <div style="height: 20px;"></div>
+    <v-card style="width: 50vw; margin-left: 25vw" v-if="!isLogin && !loading">
+      <v-card-title>
+        未登录
+      </v-card-title>
+      <v-card-text>
+        请前往登录
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="green" @click="$router.push('/users/login')">登录</v-btn>
+        <v-btn color="red" @click="$router.push('/users/register')">注册</v-btn>
+      </v-card-actions>
+    </v-card>
     <v-card style="width: 100px; margin-left: 48vw; margin-top: 40vh" v-if="loading">
       <v-card-title>
         加载中
       </v-card-title>
     </v-card>
-    <v-card style="width: 50vw; margin-left: 25vw" v-if="!loading">
+    <v-card style="width: 50vw; margin-left: 25vw" v-if="!loading && isLogin">
       <v-card-title>
-        用户信息
+        个人中心
       </v-card-title>
       <v-card-text>
         <div style="height: 10px;"></div>
@@ -25,9 +38,8 @@
             </v-btn>
           </v-snackbar>
           <v-col cols="13" style="margin-top: -10px;">
-            <p>{{ userInfo.name }} <v-chip v-if="userInfo.isAdmin" class="ma-1" :color="userInfo.isAdmin ? adminBadgeColor : 'grey'"
-                text-color="white" small>{{ userInfo.isAdmin ? '管理员 lv'+userInfo.adminLevel : '普通用户' }}</v-chip>
-            </p>
+            <p>{{ userInfo.name }} <v-chip v-if="userInfo.isAdmin" class="ma-1"
+                :color="userInfo.isAdmin ? adminBadgeColor : 'grey'" text-color="white" small>{{ userInfo.isAdmin ? '管理员lv'+userInfo.adminLevel : '普通用户' }}</v-chip></p>
             <p>个性签名：{{ userInfo.description }}</p>
           </v-col>
         </v-row>
@@ -45,6 +57,10 @@
           <p v-if="userInfo.sponsershipAmount > 0"> 你是为JerryMC赞助了{{ userInfo.sponsershipAmount }}元的用户！ 谢谢你！</p>
         </v-col>
       </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="red" @click="logOut()">登出</v-btn>
+      </v-card-actions>
     </v-card>
   </div>
 </template>
@@ -88,6 +104,10 @@ export default {
     changeEmail() {
       this.text = '功能开发中，敬请谅解~'
       this.snackbar = true
+    },
+    logOut() {
+      this.text = '功能开发中，敬请谅解~'
+      this.snackbar = true
     }
   },
   mounted() {
@@ -116,10 +136,8 @@ export default {
             break;
         };
       }
-    }, 100);
-    setTimeout(async () => {
       this.loading = false
-    }, 200)
+    }, 100);
   },
   computed: {
     token() {
