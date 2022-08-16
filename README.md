@@ -1,4 +1,6 @@
 # jmc-home  
 
-![GitHub top language](https://img.shields.io/github/languages/top/bcmRayCrazy-coder/jmc-home)  
-
+![Language](https://img.shields.io/badge/language-javascript-yellow)
+![Framework using](https://img.shields.io/badge/framework-Nuxt.js-brightgreen)
+![Current tag](https://img.shields.io/badge/tag-v1.2.2-ff69b4)
+![This version is on the server](https://img.shields.io/badge/onserver-no-red)
