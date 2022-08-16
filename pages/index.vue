@@ -82,7 +82,7 @@ export default {
         that.accoutInfo = res.message.data;
         console.log(that.accoutInfo);
       }
-    }, this.$nextTick);
+    }, 100);
     setTimeout(() => {
       that.show = true;
     }, 700);

@@ -69,7 +69,7 @@ export default {
         that.accoutInfo = res.message.data;
         console.log(that.accoutInfo);
       }
-    }, this.$nextTick);
+    }, 100);
   },
   computed: {
     token() {

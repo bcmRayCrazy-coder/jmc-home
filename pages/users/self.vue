@@ -80,7 +80,7 @@ export default {
         that.qq = res.message.data.qq;
         that.sponsershipAmount = res.message.data.sponsershipAmount;
       }
-    }, this.$nextTick);
+    }, 100);
   },
   computed: {
     token() {
