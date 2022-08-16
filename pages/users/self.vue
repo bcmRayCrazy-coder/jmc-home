@@ -13,7 +13,7 @@
       <v-card-text>
         <div style="height: 10px;"></div>
         <v-row style="margin-left: 0px">
-          <div @click="snackbar = true; text = '管理员权限组'" style="position: relative; left: 65px; top: -5px;z-index: 3;">
+          <div @click="snackbar = true; text = '管理员权限组lv.'+userInfo.adminLevel+'勋章'" style="position: relative; left: 65px; top: -5px;z-index: 3;">
             <v-badge :color="adminBadgeColor" avatar overlap offset-x="70" icon="mdi-account"></v-badge>
           </div>
           <v-avatar class="mr-2" color="grey darken-1" size="60"></v-avatar>
