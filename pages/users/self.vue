@@ -105,7 +105,9 @@ export default {
         };
       }
     }, 100);
-    this.loading = false
+    setTimeout(async () => {
+      this.loading = false
+    }, 200)
   },
   computed: {
     token() {
