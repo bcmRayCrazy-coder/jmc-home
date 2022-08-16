@@ -10,14 +10,14 @@
         <v-row style="margin-left: 0px">
           <v-avatar class="mr-2" color="grey darken-1" size="60"></v-avatar>
           <v-col cols="13" style="margin-top: -10px;">
-            <p>{{ name }} <v-chip v-if="isAdmin" class="ma-1" color="red" text-color="white" small>管理员权限组</v-chip>
+            <p>{{ userInfo.name }} <v-chip v-if="userInfo.isAdmin" class="ma-1" :color="userInfo.isAdmin?'red':'grey'" text-color="white" small>{{userInfo.isAdmin?'管理员':'普通用户'}}</v-chip>
             </p>
-            <p>个性签名：{{ description }}</p>
+            <p>个性签名：{{ userInfo.description }}</p>
           </v-col>
         </v-row>
         <div style="height: 30px"></div>
         <v-col style="margin-left: 0px; margin-top: -40px;">
-          <p> 等级: {{ level }} </p>
+          <p> 等级: {{ userInfo.level }} </p>
           <div style="width: 5px"></div>
         </v-col>
       </v-card-text>
@@ -38,20 +38,22 @@ export default {
           to: '/whitelist/list',
         },
       ],
+      userInfo:{
       isLogin: false,
       name: '',
-      adminLevel: '',
+      adminLevel: 0,
       avatar: '',
       description: '',
       email: '',
-      exp: '',
-      gender: '',
-      gold: '',
-      id: '',
-      isAdmin: '',
-      level: '',
+      exp: 0,
+      gender: 0,
+      gold: 0,
+      id: 0,
+      isAdmin: false,
+      level: 0,
       qq: '',
-      sponsershipAmount: '',
+      sponsershipAmount: 0
+      }
     };
   },
   mounted() {
@@ -64,21 +66,7 @@ export default {
         if (!res.success)
           return that.$toast.error('登录状态获取失败!请重新登录');
         that.isLogin = true;
-        that.accoutInfo = res.message.data;
-        console.log(that.accoutInfo);
-        that.adminLevel = res.message.data.adminLevel;
-        that.avatar = res.message.data.avatar;
-        that.description = res.message.data.description;
-        that.email = res.message.data.email;
-        that.exp = res.message.data.exp;
-        that.gender = res.message.data.gender;
-        that.gold = res.message.data.gold;
-        that.id = res.message.data.id;
-        that.isAdmin = res.message.data.isAdmin;
-        that.level = res.message.data.level;
-        that.name = res.message.data.name;
-        that.qq = res.message.data.qq;
-        that.sponsershipAmount = res.message.data.sponsershipAmount;
+        that.userInfo = res.message.data;
       }
     }, 100);
   },
