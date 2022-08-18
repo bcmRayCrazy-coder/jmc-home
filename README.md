@@ -5,4 +5,4 @@
 ![Current tag](https://img.shields.io/badge/tag-v1.2.6-ff69b4)
 ![This version is on the server](https://img.shields.io/badge/onserver-no-red)
 
-[Website](http://www.jerrymc.cn:1200)
+[Website](https://www.jerrymc.cn:1200)
