@@ -106,8 +106,8 @@ export default {
       this.snackbar = true
     },
     logOut() {
-      this.text = '功能开发中，敬请谅解~'
-      this.snackbar = true
+      this.$store.dispatch('userstore/setToken', 'loggedOut');
+      window.location.href="/";
     }
   },
   mounted() {

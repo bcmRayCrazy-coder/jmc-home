@@ -1,5 +1,11 @@
 <template>
   <div>
+    <v-snackbar v-model="snackbar">
+      {{ text }}
+      <v-btn style="position: relative; margin-left: 20vw;" color="pink" text @click="snackbar = false">
+        我知道了
+      </v-btn>
+    </v-snackbar>
     <div class="main-screen" ref="mainWrapper">
       <v-img :lazy-src="mainImgLazy" :height="screen.height" :width="screen.width" :src="mainImg"
         style="position: absolute; z-index: 1"></v-img>
@@ -65,6 +71,8 @@ export default {
       loading: {
         qq: false,
       },
+      snackbar: false,
+      text: '',
     };
   },
   mounted() {
@@ -75,12 +83,18 @@ export default {
       var token = that.token;
       if (!token) console.log('未登录');
       if (token) {
-        var res = await that.$axios.$post('/api/users/online', { token });
-        if (!res.success)
-          return that.$toast.error('登录状态获取失败!请重新登录');
-        that.isLogin = true;
-        that.accoutInfo = res.message.data;
-        console.log(that.accoutInfo);
+        if (token == "loggedOut") {
+          this.text = '已退出登录';
+          this.snackbar = true;
+          this.$store.dispatch('userstore/setToken', '');
+        } else {
+          var res = await that.$axios.$post('/api/users/online', { token });
+          if (!res.success)
+            return that.$toast.error('登录状态获取失败!请重新登录');
+          that.isLogin = true;
+          that.accoutInfo = res.message.data;
+          console.log(that.accoutInfo);
+        }
       }
     }, 100);
     setTimeout(() => {
