@@ -99,7 +99,6 @@ const config = {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-<<<<<<< HEAD
     server: {
         host: '0.0.0.0',
         port: 1200,
@@ -108,16 +107,6 @@ const config = {
         //     cert: fs.readFileSync(path.resolve(__dirname, 'https/www.jerrymc.cn.pem')),
         // }
     },
-=======
-  server: {
-    host: '0.0.0.0',
-    port: 1200,
-    // https: {
-    //     key: fs.readFileSync(path.resolve(__dirname, 'https/www.jerrymc.cn.key')),
-    //     cert: fs.readFileSync(path.resolve(__dirname, 'https/www.jerrymc.cn.pem')),
-    // }
-  },
->>>>>>> 013cfc02bb166d1caca1306bced8465abc937eba
 };
 
 export default config;
