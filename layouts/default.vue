@@ -70,7 +70,7 @@ export default {
     setTimeout(async () => {
       var token = that.token;
       if (!token) console.log('未登录');
-      if (token && token != 'loggedOut') {
+      if (token != '' && token != 'loggedOut') {
         var res = await that.$axios.$post('/api/users/online', { token });
         if (!res.success)
           return that.$toast.error('登录状态获取失败!请重新登录');
