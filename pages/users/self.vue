@@ -1,65 +1,61 @@
 <template>
   <div>
-    <div style="height: 20px;"></div>
-    <v-card style="width: 50vw; margin-left: 25vw" v-if="!isLogin && !loading">
-      <v-card-title>
-        未登录
-      </v-card-title>
+    <div style="height: 20px"></div>
+    <v-skeleton-loader
+      class="user-card"
+      v-if="loading"
+      type="card-heading, list-item-avatar-two-line, list-item-three-line, actions"
+    ></v-skeleton-loader>
+    <v-card class="user-card" v-if="!loading" :loading="loading">
+      <v-card-title> 个人中心 </v-card-title>
       <v-card-text>
-        请前往登录
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="green" @click="$router.push('/users/login')">登录</v-btn>
-        <v-btn color="red" @click="$router.push('/users/register')">注册</v-btn>
-      </v-card-actions>
-    </v-card>
-    <v-card style="width: 100px; margin-left: 48vw; margin-top: 40vh" v-if="loading">
-      <v-card-title>
-        加载中
-      </v-card-title>
-    </v-card>
-    <v-card style="width: 50vw; margin-left: 25vw" v-if="!loading && isLogin">
-      <v-card-title>
-        个人中心
-      </v-card-title>
-      <v-card-text>
-        <div style="height: 10px;"></div>
-        <v-row style="margin-left: 0px">
-          <div @click="snackbar = true; text = '管理员权限组lv.' + userInfo.adminLevel + '勋章'"
-            style="position: relative; left: 65px; top: -5px;z-index: 3;">
-            <v-badge :color="adminBadgeColor" avatar overlap offset-x="70" icon="mdi-account"></v-badge>
-          </div>
-          <v-avatar class="mr-2" color="grey darken-1" size="60"></v-avatar>
-          <v-snackbar v-model="snackbar">
-            {{ text }}
-            <v-btn style="position: relative; margin-left: 20vw;" color="pink" text @click="snackbar = false">
-              我知道了
-            </v-btn>
-          </v-snackbar>
-          <v-col cols="13" style="margin-top: -10px;">
-            <p>{{ userInfo.name }} <v-chip v-if="userInfo.isAdmin" class="ma-1"
-                :color="userInfo.isAdmin ? adminBadgeColor : 'grey'" text-color="white" small>{{ userInfo.isAdmin ? '管理员lv'+userInfo.adminLevel : '普通用户' }}</v-chip></p>
+        <v-row style="margin-left: 0px" class="mt-2">
+          <v-avatar class="mr-2" color="grey darken-1" size="60"
+            ><img :src="userInfo.avatar" alt="用户头像"
+          /></v-avatar>
+          <v-col cols="13" style="margin-top: -10px" class="user-info-col">
+            <p>
+              {{ userInfo.name }}
+              <v-chip
+                v-if="userInfo.isAdmin"
+                class="ma-1"
+                :color="userInfo.isAdmin ? adminBadgeColor : 'grey'"
+                text-color="white"
+                small
+                >{{
+                  ['普通用户', '1', '2', '3', '服主'][userInfo.adminLevel]
+                }}</v-chip
+              >
+            </p>
             <p>个性签名：{{ userInfo.description }}</p>
           </v-col>
         </v-row>
-        <div style="height: 30px"></div>
-        <v-col style="margin-left: 0px; margin-top: -40px;">
-          <p> 等级: {{ userInfo.level }} </p>
-          <v-row style="margin-left: 0px;">
-            <p> 绑定的邮箱： {{ userInfo.email }}</p>
-            <v-spacer></v-spacer>
-            <v-btn height="20px" @click="changeEmail()">更改</v-btn>
-          </v-row>
-          <p> 等级经验值：{{ userInfo.exp }}/100 来达到等级{{ userInfo.level + 1 }}</p>
-          <v-progress-linear :value="userInfo.exp" rounded></v-progress-linear>
-          <div style="height: 10px;" v-if="userInfo.sponsershipAmount > 0"></div>
-          <p v-if="userInfo.sponsershipAmount > 0"> 你是为JerryMC赞助了{{ userInfo.sponsershipAmount }}元的用户！ 谢谢你！</p>
+
+        <v-col class="ml-0 mt-2 user-info-col">
+          <p>邮箱： {{ userInfo.email }}</p>
+          <p>金币: {{ userInfo.gold }}</p>
+          <p>等级: {{ userInfo.level }}</p>
+          <p>经验值：{{ userInfo.exp }}</p>
+          <v-progress-linear
+            class="mt-5"
+            :value="userInfo.exp"
+            rounded
+            height="25px"
+            color="yellow"
+          >
+            <template v-slot:default="{ value }">
+              <strong>{{ value }} / 100</strong>
+            </template>
+          </v-progress-linear>
+          <div style="height: 10px" v-if="userInfo.sponsershipAmount > 0"></div>
+          <p v-if="userInfo.sponsershipAmount > 0">
+            你是为JerryMC赞助了{{ userInfo.sponsershipAmount }}元的用户!
+          </p>
         </v-col>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="red" @click="logOut()">登出</v-btn>
+        <v-btn color="red" dark elevation="0" @click="logOut()">登出</v-btn>
       </v-card-actions>
     </v-card>
   </div>
@@ -96,19 +92,14 @@ export default {
         sponsershipAmount: 0,
       },
       loading: true,
-      snackbar: false,
       text: '',
     };
   },
   methods: {
-    changeEmail() {
-      this.text = '功能开发中，敬请谅解~'
-      this.snackbar = true
-    },
     logOut() {
       this.$store.dispatch('userstore/setToken', 'loggedOut');
-      window.location.href="/";
-    }
+      window.location.href = '/';
+    },
   },
   mounted() {
     var that = this;
@@ -121,22 +112,15 @@ export default {
           return that.$toast.error('登录状态获取失败!请重新登录');
         that.isLogin = true;
         that.userInfo = res.message.data;
-        switch (that.userInfo.adminLevel) {
-          case 1:
-            that.adminBadgeColor = 'green lighten-1';
-            break;
-          case 2:
-            that.adminBadgeColor = 'yellow darken-2';
-            break;
-          case 3:
-            that.adminBadgeColor = 'blue lighten-1';
-            break;
-          case 4:
-            that.adminBadgeColor = 'red';
-            break;
-        };
+        that.adminBadgeColor = [
+          'grey',
+          'green lighten-1',
+          'yellow darken-2',
+          'blue lighten-1',
+          'red',
+        ][that.userInfo.adminLevel];
       }
-      this.loading = false
+      this.loading = false;
     }, 100);
   },
   computed: {
@@ -152,3 +136,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.user-card {
+  width: 50vw;
+  margin-left: 25vw;
+}
+.user-info-col p {
+  margin-bottom: 2px;
+}
+</style>
