@@ -99,10 +99,10 @@ const config = {
     server: {
         host: '0.0.0.0',
         port: 1200,
-        https: {
-            key: fs.readFileSync(path.resolve(__dirname, 'https/www.jerrymc.cn.key')),
-            cert: fs.readFileSync(path.resolve(__dirname, 'https/www.jerrymc.cn.pem')),
-        }
+        // https: {
+        //     key: fs.readFileSync(path.resolve(__dirname, 'https/www.jerrymc.cn.key')),
+        //     cert: fs.readFileSync(path.resolve(__dirname, 'https/www.jerrymc.cn.pem')),
+        // }
     },
 };
 
