@@ -5,8 +5,17 @@
       <v-expand-transition>
         <v-card-text v-if="animation.text">
           <v-form ref="form">
-            <v-text-field v-model="form.username" label="用户名" :rules="[(v) => !!v || '请输入用户名']"></v-text-field>
-            <v-text-field v-model="form.password" label="密码" :rules="[(v) => !!v || '请输入密码']" type="password">
+            <v-text-field
+              v-model="form.username"
+              label="用户名"
+              :rules="[(v) => !!v || '请输入用户名']"
+            ></v-text-field>
+            <v-text-field
+              v-model="form.password"
+              label="密码"
+              :rules="[(v) => !!v || '请输入密码']"
+              type="password"
+            >
             </v-text-field>
           </v-form>
           没有账号?<a href="/users/register">注册</a>一个

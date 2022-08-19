@@ -18,7 +18,12 @@
         <v-spacer></v-spacer>
 
         <div class="text-center">
-          <v-chip class="ma-1" color="indigo" text-color="white" @click="$router.push('/users/self')">
+          <v-chip
+            class="ma-1"
+            color="indigo"
+            text-color="white"
+            @click="$router.push('/users/self')"
+          >
             <v-avatar class="mr-2" color="grey darken-1" size="24"></v-avatar>
             {{ isLogin ? accoutInfo.name : '未登录' }}
           </v-chip>
@@ -47,8 +52,8 @@ export default {
         },
         {
           text: '个人中心',
-          to: '/users/self/'
-        }
+          to: '/users/self/',
+        },
       ],
       isLogin: false,
       accoutInfo: {
@@ -65,7 +70,7 @@ export default {
     setTimeout(async () => {
       var token = that.token;
       if (!token) console.log('未登录');
-      if (token && token != "loggedOut") {
+      if (token && token != 'loggedOut') {
         var res = await that.$axios.$post('/api/users/online', { token });
         if (!res.success)
           return that.$toast.error('登录状态获取失败!请重新登录');
