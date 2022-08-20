@@ -20,15 +20,16 @@
                 }会在服务器内做的事情`"
                 :rules="[(v) => !!v || '请输入在里面做的事情']"
               ></v-text-field>
-              <v-checkbox
-                v-model="form.promise"
-                :label="`我保证${
-                  form.nickname.length == 0 ? '我' : form.nickname
-                }不会在服务器内作出 损害玩家利益、违反法律 的行为`"
-                :rules="[(v) => !!v || '必须保证上述内容']"
-              >
-                ></v-checkbox
-              >
+              <v-row style="margin-left: 0px;">
+                <v-checkbox
+                  v-model="form.promise"
+                  :label="`${
+                    form.nickname.length == 0 ? '我' : form.nickname
+                  }已阅读并保证不会违反`"
+                  :rules="[(v) => !!v || '必须保证上述内容']"
+                ></v-checkbox>
+                <a @click="$router.push('/whitelist/userterms')" style="margin-top: 21px; font-size: 16px; text-decoration:underline;">玩家守则</a>
+              </v-row>
             </v-form>
           </v-card-text>
         </v-expand-transition>

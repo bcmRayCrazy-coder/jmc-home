@@ -61,8 +61,8 @@ const config = {
     '/api': {
       target:
         process.env.NODE_ENV == 'development'
-          ? 'http://www.jerrymc.cn'
-          : 'http://localhost:80',
+          ? 'http://localhost:80'
+          : 'http://www.jerrymc.cn',
       pathRewrite: {
         '^/api/': '/',
       },

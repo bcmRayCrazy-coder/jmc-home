@@ -101,7 +101,10 @@ export default {
     var that = this;
     setTimeout(async () => {
       var token = that.token;
-      if (!token) console.log('未登录');
+      if (!token) {
+        this.$toast.error("请先登录");
+        this.$router.push("/users/login")
+      }
       if (token) {
         var res = await that.$axios.$post('/api/users/online', { token });
         if (!res.success)
