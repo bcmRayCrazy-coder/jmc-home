@@ -54,6 +54,10 @@ export default {
           text: '个人中心',
           to: '/users/self/',
         },
+        {
+          text: '地铁站牌生成器',
+          to: 'tools/metroGenerator',
+        }
       ],
       isLogin: false,
       accoutInfo: {
