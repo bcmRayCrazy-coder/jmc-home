@@ -13,34 +13,82 @@
             <v-select v-model="SignTypes" :items="items" :hint="`${SignTypes.type}`" item-text="type" persistent-hint
               return-object label="选择站牌类型" solo></v-select>
           </v-col>
-          <p>拾色器当前颜色：{{ showColor }}</p>
-          <v-row>
-            <v-text-field :rules="requiredRule" label="本站站名"></v-text-field>
-            <v-spacer></v-spacer>
-            <v-text-field :rules="requiredRule" label="下一站站名"></v-text-field>
-          </v-row>
-          <v-row>
-            <v-text-field :rules="requiredRule" label="线路编号"></v-text-field>
-            <v-spacer></v-spacer>
-            <v-text-field disabled :rules="requiredRule" :label="`线路颜色：${mainLineColor}`"></v-text-field>
-          </v-row>
-          <v-col class="d-flex" cols="12">
-            <v-select :items="ArrowDirections" label="箭头方向（必选）" solo></v-select>
-          </v-col>
-          <v-row>
-            <v-switch @change="switchUpdate()" v-model="transferStation" label="换乘站点" color="red" value="red"
-              hide-details></v-switch>
-            <div style="width: 10px"></div>
-            <v-text-field :rules="requiredRule" label="可换乘线路编号" v-if="transferStation"></v-text-field>
-            <v-text-field :rules="requiredRule" disabled :label="`换乘线路颜色 ${transferLineColor}`" v-if="transferStation">
-            </v-text-field>
+          <div class="stationInformation" v-if="SignTypes.type == '站台候车信息'">
+            <p>拾色器当前颜色：{{ showColor }}</p>
+            <v-row>
+              <v-text-field :rules="requiredRule" label="本站站名"></v-text-field>
+              <v-spacer></v-spacer>
+              <v-text-field :rules="requiredRule" label="下一站站名"></v-text-field>
+            </v-row>
+            <v-row>
+              <v-text-field :rules="requiredRule" label="线路编号"></v-text-field>
+              <v-spacer></v-spacer>
+              <v-text-field disabled :rules="requiredRule" :label="`线路颜色：${mainLineColor}`"></v-text-field>
+            </v-row>
+            <v-col class="d-flex" cols="12">
+              <v-select :items="ArrowDirections" label="箭头方向（必选）" solo></v-select>
+            </v-col>
+            <v-row>
+              <v-switch @change="switchUpdate()" v-model="transferStation" label="换乘站点" color="red" value="red"
+                hide-details></v-switch>
+              <div style="width: 10px"></div>
+              <v-text-field :rules="requiredRule" label="可换乘线路编号" v-if="transferStation"></v-text-field>
+              <v-text-field :rules="requiredRule" disabled :label="`换乘线路颜色 ${transferLineColor}`"
+                v-if="transferStation">
+              </v-text-field>
 
-          </v-row>
+            </v-row>
+          </div>
+          <div class="transferGuide" v-if="SignTypes.type == '换乘指引'">
+            <p>拾色器当前颜色：{{ showColor }}</p>
+            <v-row>
+              <v-text-field :rules="requiredRule" label="本站站名"></v-text-field>
+            </v-row>
+            <v-row>
+              <v-text-field :rules="requiredRule" label="线路编号"></v-text-field>
+              <v-spacer></v-spacer>
+              <v-text-field disabled :rules="requiredRule" :label="`线路颜色：${mainLineColor}`"></v-text-field>
+            </v-row>
+            <v-col class="d-flex" cols="12">
+              <v-select :items="ArrowDirections" label="箭头方向（必选）" solo></v-select>
+            </v-col>
+            <v-row>
+              <v-text-field :rules="requiredRule" label="可换乘线路编号"></v-text-field>
+              <v-spacer></v-spacer>
+              <v-text-field :rules="requiredRule" disabled :label="`换乘线路颜色 ${transferLineColor}`"></v-text-field>
+            </v-row>
+          </div>
+          <div class="exitInformation" v-if="SignTypes.type == '出站口指引'">
+            <p>拾色器当前颜色：{{ showColor }}</p>
+            <v-text-field :rules="requiredRule" label="本站站名"></v-text-field>
+            <v-row>
+              <v-text-field :rules="requiredRule" label="线路编号"></v-text-field>
+              <v-spacer></v-spacer>
+              <v-text-field disabled :rules="requiredRule" :label="`线路颜色：${mainLineColor}`"></v-text-field>
+            </v-row>
+            <v-col class="d-flex" cols="12">
+              <v-select :items="ArrowDirections" label="箭头方向（必选）" solo></v-select>
+            </v-col>
+            <v-row>
+              <v-switch @change="switchUpdate()" v-model="transferStation" label="换乘站点" color="red" value="red"
+                hide-details></v-switch>
+              <div style="width: 10px"></div>
+              <v-text-field :rules="requiredRule" label="可换乘线路编号" v-if="transferStation"></v-text-field>
+              <v-text-field :rules="requiredRule" disabled :label="`换乘线路颜色 ${transferLineColor}`"
+                v-if="transferStation">
+              </v-text-field>
+
+            </v-row>
+          </div>
         </div>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn @click="togglePicker()">{{ pickerText }}</v-btn>
+        <v-btn @click="togglePicker()"
+          v-if="SignTypes.type == '站台候车信息' || SignTypes.type == '换乘指引' || SignTypes.type == '出站口指引'">{{ pickerText }}
+        </v-btn>
+        <div style="width: 10px"></div>
+        <v-btn @click="done()" color="green darken-2">完成</v-btn>
       </v-card-actions>
     </v-card>
     <v-color-picker v-model="color" style="margin-left: 500px; position: relative; top: 10px;" v-if="pickerState"
@@ -84,6 +132,19 @@ export default {
     };
   },
   methods: {
+    done() {
+      if (this.SignTypes.type == "请选择站牌类型") {
+        this.$toast.error("您还没有选择类型，无法生成！")
+      } else {
+        this.$toast.success("正在为您生成图片并将在1秒后刷新该页面，您可以浏览生成的图片并在该页面刷新后继续生成站牌。")
+        setTimeout(function () {
+          window.open("https://www.baidu.com")
+        }, 1000);
+        setTimeout(function () {
+          window.location.reload()
+        }, 1200);
+      }
+    },
     switchUpdate() {
       this.pickTimes += 1
       console.log(this.pickTimes)
@@ -100,7 +161,7 @@ export default {
     togglePicker() {
       if (!this.pickerState) {
         //未开启拾色器
-        if (this.transferStation) {
+        if (this.transferStation || this.SignTypes.type == "换乘指引") {
           if (this.pickerFor == "normal") {
             this.pickerFor = "transfer"
           } else {
@@ -114,6 +175,20 @@ export default {
         console.log(this.pickerFor)
         if (this.transferStation) {
           switch (this.pickerFor) {
+            case "normal":
+              this.mainLineColor = this.showColor
+              this.$toast.success("线路颜色已成功设置为 " + this.mainLineColor);
+              this.pickerText = "选择换乘线路颜色"
+              break
+            case "transfer":
+              this.transferLineColor = this.showColor
+              this.$toast.success("换乘线路颜色已成功设置为 " + this.transferLineColor);
+              this.pickerText = "选择线路颜色"
+              break
+          }
+        } else if (this.SignTypes.type == "换乘指引") {
+          switch (this.pickerFor) {
+            //我也不知道为什么他反了但是人和代码有一个能跑就行
             case "normal":
               this.mainLineColor = this.showColor
               this.$toast.success("线路颜色已成功设置为 " + this.mainLineColor);
