@@ -27,7 +27,9 @@ const config = {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    '@mdi/font/css/materialdesignicons.css'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [{ src: '@/plugins/localStorage', ssr: false }, '@/plugins/lodash'],
@@ -101,7 +103,7 @@ const config = {
 
     server: {
         host: '0.0.0.0',
-        port: 1200,
+        port: 80,
         // https: {
         //     key: fs.readFileSync(path.resolve(__dirname, 'https/www.jerrymc.cn.key')),
         //     cert: fs.readFileSync(path.resolve(__dirname, 'https/www.jerrymc.cn.pem')),
