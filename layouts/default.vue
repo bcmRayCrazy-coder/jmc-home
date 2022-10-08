@@ -44,7 +44,7 @@ export default {
       links: [
         {
           text: '主页',
-          to: '/',
+          to: '/jmc',
         },
         {
           text: '白名单列表',
@@ -56,7 +56,7 @@ export default {
         },
         {
           text: '地铁站牌生成器',
-          to: 'tools/metroGenerator',
+          to: '/tools/metroGenerator',
         }
       ],
       isLogin: false,

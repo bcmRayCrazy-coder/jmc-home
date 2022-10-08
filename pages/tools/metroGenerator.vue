@@ -6,7 +6,7 @@
         地铁站牌生成器
       </v-card-title>
       <v-card-text>
-        选择站牌样式、内容，点击生成，系统便会为你生成一个站牌。如你需要参与地铁建设，请生成后拷贝链接，使用/tomap指令生成站牌并放置。
+        选择站牌样式、内容，点击生成，系统便会为你生成一个站牌。如你需要参与地铁建设，请生成后拷贝链接，使用/tomap指令生成站牌并放置。<br>如您遇到排版错误问题，请刷新。
         <div style="height: 5px;"></div>
         <div class="container">
           <v-col class="d-flex" cols="12">
