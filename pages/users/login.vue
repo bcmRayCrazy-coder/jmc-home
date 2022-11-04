@@ -65,7 +65,7 @@ export default {
         this.$toast.success('登录成功!\n将在一秒后回到主页');
         // console.log(this.$store.state.userstore.token);
         setTimeout(() => {
-          window.open('/', '__blank');
+          window.open('/jmc', '__blank');
         }, 1000);
       }
     },

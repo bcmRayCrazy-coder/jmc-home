@@ -94,7 +94,7 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch('userstore/setToken', 'loggedOut');
-      window.location.href = '/';
+      window.location.href = '/jmc';
     },
   },
   mounted() {
