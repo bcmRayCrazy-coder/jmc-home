@@ -14,6 +14,14 @@
         >
           {{ link.text }}
         </v-btn>
+        <v-btn
+          v-if="this.adminLevel > 0"
+          key="1"
+          @click="$router.push('/tools/user')"
+          text
+        >
+          用户管理
+        </v-btn>
 
         <v-spacer></v-spacer>
 
@@ -44,7 +52,7 @@ export default {
       links: [
         {
           text: '主页',
-          to: '/jmc',
+          to: '/',
         },
         {
           text: '白名单列表',
@@ -63,6 +71,7 @@ export default {
       accoutInfo: {
         name: '',
       },
+      adminLevel: 0,
     };
   },
   mounted() {
@@ -80,6 +89,7 @@ export default {
           return that.$toast.error('登录状态获取失败!请重新登录');
         that.isLogin = true;
         that.accoutInfo = res.message.data;
+        that.adminLevel = res.message.data.adminLevel
         console.log(that.accoutInfo);
       }
     }, 100);

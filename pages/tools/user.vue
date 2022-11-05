@@ -73,7 +73,7 @@ export default {
           value: 'nickname',
         },
         {
-          text: '管理员状态',
+          text: '管理员等级',
           value: 'uid',
         },
         {
@@ -109,12 +109,14 @@ export default {
           value: 3,
         },
       ],
+      adminLevel: 0,
     };
   },
   mounted() {
     var that = this;
     setTimeout(async () => {
       var token = that.token;
+      console.log(token, res);
       if (!token) {
         this.$toast.error('请先登录');
         return this.$router.push('/users/login');
@@ -125,11 +127,35 @@ export default {
         return this.$router.push('/users/login');
       }
       that.userData = res.message.data;
+      that.adminLevel = res.message.data.adminLevel;
+      if (that.adminLevel == 0) {
+        this.$toast.error('你没有权限访问这个页面');
+        return this.$router.push('/')
+      }
       console.log(token, res);
       that.refreshList();
     }, 100);
   },
   methods: {
+    async refreshList() {
+      this.listLoading = true;
+      this.items = [];
+      var { list } = await this.$axios.$post('/api/whitelist/list', {
+        token: this.token,
+      });
+      console.log(list);
+      var that = this;
+      list.forEach((e) => {
+        that.items.push({
+          id: e.id,
+          nickname: e.nickname,
+          uid: e.uid,
+          status: e.status,
+          does: e.does,
+        });
+      });
+      this.listLoading = false;
+    },
     editItem(item) {
       console.log(item);
       Object.assign(this.editDialog, item);
